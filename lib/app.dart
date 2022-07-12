@@ -1,4 +1,4 @@
-import 'package:checkitout/screen/homePage.dart';
+import 'package:checkitout/screens/homePage.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
