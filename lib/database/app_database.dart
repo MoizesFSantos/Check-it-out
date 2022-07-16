@@ -2,14 +2,25 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseConnection {
-  setDatabase() async {
-    var directory = await getApplicationDocumentsDirectory();
-    var path = join(directory.path, 'db_task,db');
-    var database =
-        await openDatabase(path, version: 1, onCreate: _onCreatingDatabase);
+class DB {
+  DB._();
 
-    return database;
+  static final DB instance = DB._();
+
+  static Database? _database;
+
+  get database async {
+    if (_database != null) return _database;
+
+    return await _initDatabase();
+  }
+
+  _initDatabase() async {
+    return await openDatabase(
+      join(await getDatabasesPath(), 'check_it_out.db'),
+      version: 1,
+      onCreate: _onCreatingDatabase,
+    );
   }
 
   _onCreatingDatabase(Database database, int version) async {

@@ -1,3 +1,8 @@
+final String tableTask = 'task';
+final String columnId = '_id';
+final String columnTitle = 'title';
+final String columnDone = 'isFinished';
+
 class TaskModel {
   int id;
   String title;
