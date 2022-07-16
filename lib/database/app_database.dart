@@ -30,7 +30,7 @@ class DB {
         title TEXT NOT NULL,
         category TEXT,
         taskDate TEXT,
-        isFinished BOOLEAN
+        isFinished INTEGER
       )
 ''');
 
