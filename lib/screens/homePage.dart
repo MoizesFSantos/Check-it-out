@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:checkitout/components/fab_menu_button.dart';
 import 'package:checkitout/screens/categoriesPage.dart';
 import 'package:checkitout/screens/taskPage.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: PageView(
         controller: pc,
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
           TaskScreen(),
           CategScreen(),
@@ -38,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: initialPage,
+        // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.task_alt), label: 'Tasks'),
           BottomNavigationBarItem(
@@ -48,6 +53,7 @@ class _HomePageState extends State<HomePage> {
               duration: Duration(milliseconds: 400), curve: Curves.decelerate);
         },
       ),
+      floatingActionButton: FabMenuButton(),
     );
   }
 }
