@@ -11,12 +11,25 @@ class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var tasks = context.watch<TaskRepository>();
+    final task = context.watch<TaskRepository>();
     return Scaffold(
         appBar: AppBar(
           title: Text('Tasks'),
           centerTitle: true,
         ),
-        body: Center(child: EmptyPage()));
+        body: ListView.separated(
+            itemBuilder: (BuildContext context, index) {
+              return ListTile(
+                  // leading: Checkbox(onChanged: (){}),
+                  //title: task['title'],
+                  );
+            },
+            separatorBuilder: (context, index) {
+              return Divider(
+                thickness: 0.5,
+                height: 0.5,
+              );
+            },
+            itemCount: task.tasks.length));
   }
 }

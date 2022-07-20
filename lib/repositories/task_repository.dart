@@ -5,18 +5,21 @@ import 'package:sqflite/sqflite.dart';
 
 class TaskRepository extends ChangeNotifier {
   late Database db;
+  List<TaskModel> _tasks = [];
+
+  List<TaskModel> get tasks => _tasks;
 
   TaskRepository() {
     _initRepository();
   }
 
   _initRepository() async {
-    await getTasks();
+    await _getTasks();
   }
 
-  getTasks() async {
+  _getTasks() async {
     db = DB.instance.database;
-    await db.query('tasks');
+    List tasks = await db.query('tasks');
     notifyListeners();
   }
 

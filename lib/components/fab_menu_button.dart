@@ -10,7 +10,7 @@ class FabMenuButton extends StatefulWidget {
 
 class _FabMenuButtonState extends State<FabMenuButton>
     with SingleTickerProviderStateMixin {
-  final actionButtonColor = Colors.indigo[400];
+  final actionButtonColor = Colors.white;
   late AnimationController animation;
   final menuIsOpen = ValueNotifier<bool>(false);
 
@@ -43,12 +43,18 @@ class _FabMenuButtonState extends State<FabMenuButton>
           onPressed: () => toggleMenu(),
         ),
         FloatingActionButton(
-          child: Icon(Icons.task_alt),
+          child: Icon(
+            Icons.task_alt,
+            color: Colors.indigo,
+          ),
           onPressed: () {},
           backgroundColor: actionButtonColor,
         ),
         FloatingActionButton(
-          child: Icon(Icons.category),
+          child: Icon(
+            Icons.category,
+            color: Colors.indigo,
+          ),
           onPressed: () {},
           backgroundColor: actionButtonColor,
         ),

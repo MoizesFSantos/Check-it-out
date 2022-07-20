@@ -1,5 +1,4 @@
 class CategoryModel {
-  
   int id;
 
   String title;
@@ -10,5 +9,7 @@ class CategoryModel {
     var mapping = Map<String, dynamic>();
     mapping['id'] = id;
     mapping['title'] = title;
+
+    return mapping;
   }
 }

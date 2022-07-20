@@ -1,5 +1,5 @@
-final String tableTask = 'task';
-final String columnId = '_id';
+final String tableTask = 'tasks';
+final String columnId = 'id';
 final String columnTitle = 'title';
 final String columnDone = 'isFinished';
 
@@ -19,5 +19,7 @@ class TaskModel {
     mapping['category'] = category;
     mapping['date'] = date;
     mapping['isFinished'] = isFinished;
+
+    return mapping;
   }
 }
