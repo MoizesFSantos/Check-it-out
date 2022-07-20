@@ -11,10 +11,10 @@ class TaskRepository extends ChangeNotifier {
   }
 
   _initRepository() async {
-    await _getTasks();
+    await getTasks();
   }
 
-  _getTasks() async {
+  getTasks() async {
     db = DB.instance.database;
     await db.query('tasks');
     notifyListeners();

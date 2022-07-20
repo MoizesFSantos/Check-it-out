@@ -39,8 +39,7 @@ class _FabMenuButtonState extends State<FabMenuButton>
       delegate: FabVerticalDelegate(animation: animation),
       children: [
         FloatingActionButton(
-          child:
-              AnimatedIcon(icon: AnimatedIcons.menu_close, progress: animation),
+          child: Icon(Icons.add),
           onPressed: () => toggleMenu(),
         ),
         FloatingActionButton(
