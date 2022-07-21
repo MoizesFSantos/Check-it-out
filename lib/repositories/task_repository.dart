@@ -1,30 +1,27 @@
-import 'package:checkitout/database/app_database.dart';
 import 'package:checkitout/models/task.model.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 class TaskRepository extends ChangeNotifier {
-  late Database db;
   List<TaskModel> _tasks = [];
+  List<TaskModel> _swaptasks = [];
 
   List<TaskModel> get tasks => _tasks;
 
-  TaskRepository() {
-    _initRepository();
-  }
+  TaskRepository();
 
-  _initRepository() async {
-    await _getTasks();
-  }
-
-  _getTasks() async {
-    db = DB.instance.database;
-    List tasks = await db.query('tasks');
+  save(String task) async {
+    final todo = TaskModel(title: task, done: false);
+    tasks.add(todo);
     notifyListeners();
   }
 
-  insetTask(TaskModel task) async {
-    db = DB.instance.database;
-    return await db.insert('tasks', task.taskMap());
+  getAll() async {
+    _tasks = _swaptasks;
+    notifyListeners();
+  }
+
+  getTasksNotDone() async {
+    _swaptasks = _tasks;
+    _tasks = tasks.where(((task) => !task.done)).toList();
   }
 }
