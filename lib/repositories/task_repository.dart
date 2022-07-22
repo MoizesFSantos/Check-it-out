@@ -1,30 +1,55 @@
-import 'package:checkitout/database/app_database.dart';
+import 'package:checkitout/database/databse.dart';
+import 'package:checkitout/database/objectbox.g.dart';
 import 'package:checkitout/models/task.model.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 class TaskRepository extends ChangeNotifier {
-  late Database db;
   List<TaskModel> _tasks = [];
+  List<TaskModel> _swaptasks = [];
+  late final DataBase _dataBase;
 
   List<TaskModel> get tasks => _tasks;
 
-  TaskRepository() {
-    _initRepository();
+  TaskRepository(this._dataBase);
+
+  Future<Box> getBox() async {
+    final store = await _dataBase.getStore();
+    return store.box<TaskModel>();
   }
 
-  _initRepository() async {
-    await _getTasks();
-  }
-
-  _getTasks() async {
-    db = DB.instance.database;
-    List tasks = await db.query('tasks');
+  save(String title, String category) async {
+    final todo = TaskModel(title: title, category: category, done: false);
+    final box = await getBox();
+    box.put(todo);
+    tasks.add(todo);
     notifyListeners();
   }
 
-  insetTask(TaskModel task) async {
-    db = DB.instance.database;
-    return await db.insert('tasks', task.taskMap());
+  update(TaskModel task) async {
+    final box = await getBox();
+    box.put(task);
+    tasks.add(task);
+    notifyListeners();
+  }
+
+  getAll() async {
+    final box = await getBox();
+    _tasks = box.getAll() as List<TaskModel>;
+    notifyListeners();
+  }
+
+  remove(TaskModel task) async {
+    final box = await getBox();
+    box.remove(task.id);
+    tasks.remove(task);
+    notifyListeners();
+  }
+
+  getTasksNotDone() async {
+    final box = await getBox();
+    final query = box.query(TaskModel_.done.equals(false)).build();
+    _tasks = query.find() as List<TaskModel>;
+    query.close();
+    notifyListeners();
   }
 }

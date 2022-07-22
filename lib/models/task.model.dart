@@ -1,25 +1,12 @@
-final String tableTask = 'tasks';
-final String columnId = 'id';
-final String columnTitle = 'title';
-final String columnDone = 'isFinished';
+import 'package:objectbox/objectbox.dart';
 
+@Entity()
 class TaskModel {
-  int id;
+  int id = 0;
   String title;
   String category;
-  String date;
-  bool isFinished;
+  String? date;
+  bool done;
 
-  TaskModel(this.id, this.title, this.category, this.date, this.isFinished);
-
-  taskMap() {
-    var mapping = Map<String, dynamic>();
-    mapping['id'] = id;
-    mapping['title'] = title;
-    mapping['category'] = category;
-    mapping['date'] = date;
-    mapping['isFinished'] = isFinished;
-
-    return mapping;
-  }
+  TaskModel({required this.title, required this.category, required this.done});
 }
