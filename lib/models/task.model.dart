@@ -4,9 +4,9 @@ import 'package:objectbox/objectbox.dart';
 class TaskModel {
   int id = 0;
   String title;
-  String? category;
+  String category;
   String? date;
   bool done;
 
-  TaskModel({required this.title, required this.done});
+  TaskModel({required this.title, required this.category, required this.done});
 }

@@ -17,11 +17,18 @@ class TaskRepository extends ChangeNotifier {
     return store.box<TaskModel>();
   }
 
-  save(String task) async {
-    final todo = TaskModel(title: task, done: false);
+  save(String title, String category) async {
+    final todo = TaskModel(title: title, category: category, done: false);
     final box = await getBox();
     box.put(todo);
     tasks.add(todo);
+    notifyListeners();
+  }
+
+  update(TaskModel task) async {
+    final box = await getBox();
+    box.put(task);
+    tasks.add(task);
     notifyListeners();
   }
 
@@ -39,7 +46,10 @@ class TaskRepository extends ChangeNotifier {
   }
 
   getTasksNotDone() async {
-    _swaptasks = _tasks;
-    _tasks = tasks.where(((task) => !task.done)).toList();
+    final box = await getBox();
+    final query = box.query(TaskModel_.done.equals(false)).build();
+    _tasks = query.find() as List<TaskModel>;
+    query.close();
+    notifyListeners();
   }
 }
