@@ -1,15 +1,10 @@
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
 class CategoryModel {
-  int id;
+  int id = 0;
 
   String title;
 
   CategoryModel(this.id, this.title);
-
-  categoryMap() {
-    var mapping = Map<String, dynamic>();
-    mapping['id'] = id;
-    mapping['title'] = title;
-
-    return mapping;
-  }
 }
