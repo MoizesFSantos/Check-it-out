@@ -59,7 +59,9 @@ class _TaskScreenState extends State<TaskScreen> {
                       return Loading();
                     }
                     if (tasks.isEmpty) {
-                      return EmptyPage();
+                      return EmptyPage(
+                        type: 'Task',
+                      );
                     }
                     return ListView.separated(
                         itemBuilder: (context, index) => ListTile(

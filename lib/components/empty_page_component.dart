@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class EmptyPage extends StatelessWidget {
-  const EmptyPage({Key? key}) : super(key: key);
+  final String type;
+
+  const EmptyPage({Key? key, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class EmptyPage extends StatelessWidget {
         children: [
           Image.asset('assets/imgs/empty_img.png'),
           Text(
-            'Add new Task ...',
+            'Add new $type ...',
             style: TextStyle(fontSize: 24, color: Colors.grey),
           )
         ],

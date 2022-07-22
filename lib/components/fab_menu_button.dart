@@ -1,5 +1,7 @@
-import 'package:checkitout/delegates/fab_vertical.dart';
+import 'package:checkitout/screens/newCategory.dart';
+import 'package:checkitout/screens/newTask.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class FabMenuButton extends StatefulWidget {
   const FabMenuButton({Key? key}) : super(key: key);
@@ -34,30 +36,34 @@ class _FabMenuButtonState extends State<FabMenuButton>
 
   @override
   Widget build(BuildContext context) {
-    return Flow(
-      clipBehavior: Clip.none,
-      delegate: FabVerticalDelegate(animation: animation),
+    return SpeedDial(
+      icon: Icons.add,
+      activeIcon: Icons.close,
+      overlayOpacity: 0.2,
+      spacing: 3,
       children: [
-        FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => toggleMenu(),
-        ),
-        FloatingActionButton(
-          child: Icon(
-            Icons.task_alt,
-            color: Colors.indigo,
-          ),
-          onPressed: () {},
-          backgroundColor: actionButtonColor,
-        ),
-        FloatingActionButton(
-          child: Icon(
-            Icons.category,
-            color: Colors.indigo,
-          ),
-          onPressed: () {},
-          backgroundColor: actionButtonColor,
-        ),
+        SpeedDialChild(
+            child: Icon(
+              Icons.task_alt,
+              color: Colors.indigo,
+            ),
+            label: 'New Task',
+            backgroundColor: Colors.white,
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => NewTask()));
+            }),
+        SpeedDialChild(
+            child: Icon(
+              Icons.category,
+              color: Colors.indigo,
+            ),
+            label: 'New Category',
+            backgroundColor: Colors.white,
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewCategory()));
+            }),
       ],
     );
   }
