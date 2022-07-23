@@ -6,5 +6,5 @@ class CategoryModel {
 
   String title;
 
-  CategoryModel(this.id, this.title);
+  CategoryModel(this.title);
 }

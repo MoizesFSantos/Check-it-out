@@ -19,8 +19,8 @@ class CategoryRepository extends ChangeNotifier {
     return store.box<CategoryModel>();
   }
 
-  save(String title, int id) async {
-    final data = CategoryModel(id, title);
+  save(String title) async {
+    final data = CategoryModel(title);
     final box = await getBox();
     box.put(data);
     categories.add(data);

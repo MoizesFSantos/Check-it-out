@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:checkitout/screens/newCategory.dart';
 import 'package:checkitout/screens/newTask.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,15 @@ class _FabMenuButtonState extends State<FabMenuButton>
   final actionButtonColor = Colors.white;
   late AnimationController animation;
   final menuIsOpen = ValueNotifier<bool>(false);
+
+  _openCategory(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return NewCategory();
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -51,7 +62,11 @@ class _FabMenuButtonState extends State<FabMenuButton>
             backgroundColor: Colors.white,
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => NewTask()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewTask(),
+                ),
+              );
             }),
         SpeedDialChild(
             child: Icon(
@@ -61,8 +76,7 @@ class _FabMenuButtonState extends State<FabMenuButton>
             label: 'New Category',
             backgroundColor: Colors.white,
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewCategory()));
+              _openCategory(context);
             }),
       ],
     );
